@@ -6,10 +6,13 @@ pydantic==2.7.4
 # RAG framework
 langchain==0.2.6
 langchain-community==0.2.6
+langchain-core==0.2.38
 langchain-huggingface==0.0.3
+langchain-openai==0.1.8
+langsmith==0.1.99
 langgraph==0.1.5
 
-# Vector database (embeddings + LLM both open-source, via Hugging Face)
+# Vector database (embeddings open-source & local; LLM open-source via HF router)
 faiss-cpu==1.8.0
 sentence-transformers==3.0.1
 huggingface_hub==0.23.4
