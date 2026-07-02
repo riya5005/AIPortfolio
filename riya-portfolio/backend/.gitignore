@@ -1,0 +1,24 @@
+# virtual environment
+venv/
+env/
+.venv/
+
+# python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# env files (keep .env.example, ignore your real .env)
+.env
+
+# the FAISS vector index — gets rebuilt automatically on first run
+vectorstore_data/
+
+# editor/OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# logs
+*.log

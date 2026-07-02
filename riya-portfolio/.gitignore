@@ -1,0 +1,6 @@
+# see frontend/.gitignore and backend/.gitignore for the details —
+# this just catches anything at the root level
+.DS_Store
+Thumbs.db
+*.log
+.env
