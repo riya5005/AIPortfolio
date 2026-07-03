@@ -15,7 +15,7 @@ langgraph==0.1.5
 # Vector database (embeddings via HF's client; LLM open-source via HF router)
 faiss-cpu==1.8.0
 numpy==1.26.4
-huggingface_hub==0.28.1
+huggingface_hub>=0.31.0,<1.0.0
 
 # Relational database (chat history logging)
 sqlalchemy==2.0.31
