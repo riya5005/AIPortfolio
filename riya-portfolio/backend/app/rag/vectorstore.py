@@ -1,18 +1,24 @@
 import os
 from langchain_community.vectorstores import FAISS
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.embeddings import HuggingFaceInferenceAPIEmbeddings
 
 from app.rag.knowledge_base import load_documents
-from app.config import VECTORSTORE_DIR, EMBEDDING_MODEL
+from app.config import VECTORSTORE_DIR, EMBEDDING_MODEL, HF_TOKEN
 
-# A small, free, fully open-source local embedding model — runs on your own
-# machine, no API key or internet call needed after the first download.
-_embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
+# IMPORTANT: this calls Hugging Face's hosted embedding API instead of
+# loading the model locally. Loading it locally requires PyTorch, which
+# alone can use 500MB+ of RAM — too much for free-tier hosting (Render's
+# free plan gives only 512MB total). Calling the API keeps this backend
+# lightweight while still using the same open-source embedding model.
+_embeddings = HuggingFaceInferenceAPIEmbeddings(
+    api_key=HF_TOKEN,
+    model_name=EMBEDDING_MODEL,
+)
 
-_vectorstore: FAISS | None = None
+_vectorstore = None
 
 
-def get_vectorstore() -> FAISS:
+def get_vectorstore():
     """Load the FAISS index from disk if it exists, otherwise build it."""
     global _vectorstore
     if _vectorstore is not None:
@@ -30,7 +36,7 @@ def get_vectorstore() -> FAISS:
     return _vectorstore
 
 
-def rebuild_vectorstore() -> FAISS:
+def rebuild_vectorstore():
     """Force a rebuild — call this after editing knowledge_base.py."""
     global _vectorstore
     docs = load_documents()
