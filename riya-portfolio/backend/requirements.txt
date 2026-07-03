@@ -12,9 +12,8 @@ langchain-openai==0.1.8
 langsmith==0.1.99
 langgraph==0.1.5
 
-# Vector database (embeddings open-source & local; LLM open-source via HF router)
+# Vector database (embeddings via HF's hosted API; LLM open-source via HF router)
 faiss-cpu==1.8.0
-sentence-transformers==3.0.1
 huggingface_hub==0.23.4
 
 # Relational database (chat history logging)
