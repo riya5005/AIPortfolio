@@ -2,19 +2,19 @@ fastapi==0.111.0
 uvicorn[standard]==0.30.1
 python-dotenv==1.0.1
 pydantic==2.7.4
+requests==2.32.3
 
 # RAG framework
 langchain==0.2.6
 langchain-community==0.2.6
 langchain-core==0.2.38
-langchain-huggingface==0.0.3
 langchain-openai==0.1.8
 langsmith==0.1.99
 langgraph==0.1.5
 
-# Vector database (embeddings via HF's hosted API; LLM open-source via HF router)
+# Vector database (embeddings via HF's hosted API — no local model, minimal memory)
 faiss-cpu==1.8.0
-huggingface_hub==0.23.4
+numpy==1.26.4
 
 # Relational database (chat history logging)
 sqlalchemy==2.0.31
