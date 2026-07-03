@@ -12,8 +12,7 @@ HF_PROVIDER = os.getenv("HF_PROVIDER", "hf-inference")
 HF_ROUTER_URL = "https://router.huggingface.co/v1"
 
 # Embedding model (already open-source / local, unchanged)
-EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
-
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "intfloat/multilingual-e5-large")
 # PostgreSQL - used only to log chat messages (optional, app still works without it)
 DATABASE_URL = os.getenv("DATABASE_URL", "")
 
