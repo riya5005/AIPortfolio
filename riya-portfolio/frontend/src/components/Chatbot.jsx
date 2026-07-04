@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
 
-// Change this if your backend runs somewhere else
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
 const suggestedPrompts = [
@@ -27,14 +26,25 @@ function Chatbot() {
 
   async function sendMessage(text) {
     if (!text.trim()) return
+
+    // Build history from current conversation (before adding the new message)
+    // in the format the backend expects: {role: "user"/"assistant", content: "..."}
+    const history = messages
+      .filter((m, i) => i !== 0) // skip the initial greeting
+      .map((m) => ({
+        role: m.role === 'user' ? 'user' : 'assistant',
+        content: m.text,
+      }))
+
     setMessages((prev) => [...prev, { role: 'user', text }])
     setInput('')
     setLoading(true)
+
     try {
       const res = await fetch(`${API_URL}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({ message: text, history }),
       })
       if (!res.ok) throw new Error('Request failed')
       const data = await res.json()
