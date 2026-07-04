@@ -1,50 +1,51 @@
 """
-A small LangGraph agent for the portfolio chatbot.
+LangGraph agent for the portfolio chatbot — now with:
+  1. Conversation memory (uses prior messages in the session as context)
+  2. LLM-based intent classification (the model decides the intent itself,
+     instead of simple keyword matching)
 
 Flow:
   classify_intent -> retrieve -> generate -> END
-
-classify_intent decides which "topic" of the knowledge base is most relevant
-(links / projects / skills / education / general) so retrieval can be biased
-toward the right documents. This is intentionally simple — it's meant to
-demonstrate an agentic graph, not a huge production system.
 """
 
-from typing import TypedDict
+from typing import TypedDict, List, Dict
 from langgraph.graph import StateGraph, END
 
 from app.rag.vectorstore import get_vectorstore
 from app.rag.chain import get_llm, SYSTEM_PROMPT
 
+VALID_INTENTS = {"links", "projects", "skills", "education", "general"}
+
 
 class ChatState(TypedDict):
     question: str
+    history: List[Dict[str, str]]   # [{"role": "user"/"assistant", "content": "..."}]
     intent: str
     context: str
     answer: str
 
 
-INTENT_KEYWORDS = {
-    "links": ["linkedin", "github", "link", "contact", "profile"],
-    "projects": ["project", "built", "fraud", "house price", "portfolio project"],
-    "skills": ["skill", "tech stack", "technology", "language", "framework", "library", "tool"],
-    "education": ["education", "degree", "college", "university", "b.tech", "btech"],
-}
-
-
 def classify_intent(state: ChatState) -> ChatState:
-    q = state["question"].lower()
-    for intent, keywords in INTENT_KEYWORDS.items():
-        if any(kw in q for kw in keywords):
-            state["intent"] = intent
-            return state
-    state["intent"] = "general"
+    """
+    The LLM itself decides the intent — this is what makes it 'agentic'
+    rather than a hardcoded if/else on keywords.
+    """
+    llm = get_llm()
+    prompt = (
+        "Classify the visitor's question into exactly ONE of these categories: "
+        "links, projects, skills, education, general.\n"
+        "Reply with only the single category word — nothing else, no punctuation.\n\n"
+        f"Question: {state['question']}"
+    )
+    response = llm.invoke([{"role": "user", "content": prompt}])
+    intent = response.content.strip().lower()
+
+    state["intent"] = intent if intent in VALID_INTENTS else "general"
     return state
 
 
 def retrieve(state: ChatState) -> ChatState:
     vectorstore = get_vectorstore()
-    # Bias the search query slightly using the detected intent
     search_query = state["question"]
     if state["intent"] != "general":
         search_query = f"{state['intent']}: {state['question']}"
@@ -55,14 +56,16 @@ def retrieve(state: ChatState) -> ChatState:
 
 
 def generate(state: ChatState) -> ChatState:
-    llm = get_llm()  # open-source model via Hugging Face's router API
+    llm = get_llm()
     system = SYSTEM_PROMPT.format(context=state["context"])
-    response = llm.invoke(
-        [
-            {"role": "system", "content": system},
-            {"role": "user", "content": state["question"]},
-        ]
-    )
+
+    # Conversation memory: include prior turns so the bot can handle
+    # follow-ups like "and her GitHub?" after "what are her skills?"
+    messages = [{"role": "system", "content": system}]
+    messages.extend(state.get("history", []))
+    messages.append({"role": "user", "content": state["question"]})
+
+    response = llm.invoke(messages)
     state["answer"] = response.content.strip()
     return state
 
@@ -91,7 +94,13 @@ def get_agent():
     return _compiled_graph
 
 
-def run_agent(question: str) -> str:
+def run_agent(question: str, history: List[Dict[str, str]] = None) -> str:
     agent = get_agent()
-    result = agent.invoke({"question": question, "intent": "", "context": "", "answer": ""})
+    result = agent.invoke({
+        "question": question,
+        "history": history or [],
+        "intent": "",
+        "context": "",
+        "answer": "",
+    })
     return result["answer"]
