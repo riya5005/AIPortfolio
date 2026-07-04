@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from typing import List, Dict, Optional
 
 from app.config import FRONTEND_ORIGIN
 from app.agent.graph import run_agent, classify_intent
@@ -23,6 +24,7 @@ def on_startup():
 
 class ChatRequest(BaseModel):
     message: str
+    history: Optional[List[Dict[str, str]]] = None
 
 
 class ChatResponse(BaseModel):
@@ -50,8 +52,15 @@ def suggested_prompts():
 
 @app.post("/api/chat", response_model=ChatResponse)
 def chat(req: ChatRequest):
-    answer = run_agent(req.message)
-    intent_state = classify_intent({"question": req.message, "intent": "", "context": "", "answer": ""})
+    # cap history to the last 6 messages (3 back-and-forth turns) to keep
+    # requests fast and cheap
+    history = (req.history or [])[-6:]
+
+    answer = run_agent(req.message, history=history)
+
+    intent_state = classify_intent({
+        "question": req.message, "history": [], "intent": "", "context": "", "answer": ""
+    })
     intent = intent_state["intent"]
 
     log_chat(question=req.message, answer=answer, intent=intent)
