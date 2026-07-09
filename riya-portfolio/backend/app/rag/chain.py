@@ -31,9 +31,7 @@ def get_llm():
     """
     global _llm
     if _llm is None:
-        # HF's router auto-selects a provider when no ":provider" suffix is
-        # given at all — ":auto" is NOT valid syntax, so we omit the suffix
-        # entirely when HF_PROVIDER is "auto" or blank.
+        
         if HF_PROVIDER and HF_PROVIDER.lower() != "auto":
             model_id = f"{HF_MODEL}:{HF_PROVIDER}"
         else:
