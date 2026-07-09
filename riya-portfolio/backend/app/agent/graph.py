@@ -1,13 +1,3 @@
-"""
-LangGraph agent for the portfolio chatbot — now with:
-  1. Conversation memory (uses prior messages in the session as context)
-  2. LLM-based intent classification (the model decides the intent itself,
-     instead of simple keyword matching)
-
-Flow:
-  classify_intent -> retrieve -> generate -> END
-"""
-
 from typing import TypedDict, List, Dict
 from langgraph.graph import StateGraph, END
 
@@ -19,7 +9,7 @@ VALID_INTENTS = {"links", "projects", "skills", "education", "general"}
 
 class ChatState(TypedDict):
     question: str
-    history: List[Dict[str, str]]   # [{"role": "user"/"assistant", "content": "..."}]
+    history: List[Dict[str, str]]  
     intent: str
     context: str
     answer: str
@@ -59,8 +49,7 @@ def generate(state: ChatState) -> ChatState:
     llm = get_llm()
     system = SYSTEM_PROMPT.format(context=state["context"])
 
-    # Conversation memory: include prior turns so the bot can handle
-    # follow-ups like "and her GitHub?" after "what are her skills?"
+   
     messages = [{"role": "system", "content": system}]
     messages.extend(state.get("history", []))
     messages.append({"role": "user", "content": state["question"]})
