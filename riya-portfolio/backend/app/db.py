@@ -1,9 +1,3 @@
-"""
-Optional: logs every chat exchange to PostgreSQL so you can see what visitors
-ask. The app works fine without this — if DATABASE_URL isn't set, logging is
-silently skipped.
-"""
-
 from datetime import datetime
 from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from sqlalchemy.orm import declarative_base, sessionmaker
