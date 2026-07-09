@@ -1,9 +1,3 @@
-"""
-This is Riya's 'knowledge base' — the source of truth the chatbot retrieves
-from. Edit this file whenever your resume changes; the vector index will
-rebuild automatically the next time the server starts (see vectorstore.py).
-"""
-
 from langchain.docstore.document import Document
 
 RAW_FACTS = [
