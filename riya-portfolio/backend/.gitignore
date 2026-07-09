@@ -8,10 +8,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# env files (keep .env.example, ignore your real .env)
+# env files 
 .env
 
-# the FAISS vector index — gets rebuilt automatically on first run
+# the FAISS vector index
 vectorstore_data/
 
 # editor/OS
