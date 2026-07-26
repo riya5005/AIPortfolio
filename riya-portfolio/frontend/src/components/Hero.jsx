@@ -5,14 +5,14 @@ function Hero() {
         <img
           className="hero-photo"
           src="/riya-photo.jpg"
-          alt="Riya Sharma"
+          alt="Riya"
           onError={(e) => {
             e.target.onerror = null
             e.target.src = 'https://ui-avatars.com/api/?name=Riya+Sharma&background=dfe6d4&color=1f1d1a&size=220'
           }}
         />
         <div className="hero-text">
-         <h1>Riya Sharma</h1>
+         <h1>Riya</h1>
 
 <p className="role">
   Machine Learning &amp; Backend Developer
