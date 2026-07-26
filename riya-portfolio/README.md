@@ -1,4 +1,4 @@
-# Riya Sharma — Portfolio + AI Chatbot
+# Riya — Portfolio + AI Chatbot
 
 Two separate apps that talk to each other:
 
