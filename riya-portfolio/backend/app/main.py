@@ -1,4 +1,6 @@
-from fastapi import FastAPI
+import time
+from collections import defaultdict, deque
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Optional
@@ -17,6 +19,21 @@ app.add_middleware(
 )
 
 
+RATE_LIMIT = 10
+WINDOW_SECONDS = 60
+_request_log: dict[str, deque] = defaultdict(deque)
+
+
+def check_rate_limit(ip: str):
+    now = time.time()
+    window = _request_log[ip]
+    while window and now - window[0] > WINDOW_SECONDS:
+        window.popleft()
+    if len(window) >= RATE_LIMIT:
+        raise HTTPException(status_code=429, detail="Too many requests — please slow down.")
+    window.append(now)
+
+
 @app.on_event("startup")
 def on_startup():
     init_db()
@@ -30,6 +47,7 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     answer: str
     intent: str
+    flagged: bool
 
 
 SUGGESTED_PROMPTS = [
@@ -51,18 +69,26 @@ def suggested_prompts():
 
 
 @app.post("/api/chat", response_model=ChatResponse)
-def chat(req: ChatRequest):
-    # cap history to the last 6 messages (3 back-and-forth turns) to keep
-    # requests fast and cheap
+def chat(req: ChatRequest, request: Request):
+    check_rate_limit(request.client.host)
+
     history = (req.history or [])[-6:]
+    start = time.time()
 
-    answer = run_agent(req.message, history=history)
+    result = run_agent(req.message, history=history)
+    latency_ms = (time.time() - start) * 1000
 
-    intent_state = classify_intent({
-        "question": req.message, "history": [], "intent": "", "context": "", "answer": ""
-    })
-    intent = intent_state["intent"]
+    log_chat(
+        question=req.message,
+        answer=result["answer"],
+        intent=result.get("intent", ""),
+        flagged=result.get("flagged", False),
+        flag_reason=result.get("flag_reason", ""),
+        latency_ms=latency_ms,
+    )
 
-    log_chat(question=req.message, answer=answer, intent=intent)
-
-    return ChatResponse(answer=answer, intent=intent)
+    return ChatResponse(
+        answer=result["answer"],
+        intent=result.get("intent", ""),
+        flagged=result.get("flagged", False),
+    )
