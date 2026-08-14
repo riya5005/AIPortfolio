@@ -12,6 +12,10 @@ langchain-openai==0.1.8
 langsmith==0.1.99
 langgraph==0.1.5
 
+#azure
+azure-identity==1.17.1
+azure-keyvault-secrets==4.8.0
+
 # Vector database 
 faiss-cpu==1.8.0
 numpy==1.26.4
