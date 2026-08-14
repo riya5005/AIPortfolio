@@ -59,15 +59,24 @@ def retrieve(state: ChatState) -> ChatState:
     if state.get("flagged"):
         return state
 
-    vectorstore = get_vectorstore()
-    search_query = state["question"]
-    if state["intent"] != "general":
-        search_query = f"{state['intent']}: {state['question']}"
+    try:
+        vectorstore = get_vectorstore()
+        search_query = state["question"]
+        if state["intent"] != "general":
+            search_query = f"{state['intent']}: {state['question']}"
 
-    docs = vectorstore.similarity_search(search_query, k=3)
-    state["context"] = "\n\n".join(d.page_content for d in docs)
+        docs = vectorstore.similarity_search(search_query, k=3)
+        state["context"] = "\n\n".join(d.page_content for d in docs)
+    except Exception as e:
+        state["context"] = ""
+        state["flagged"] = True
+        state["flag_reason"] = f"retrieve_error:{type(e).__name__}"
+        state["answer"] = (
+            "I'm temporarily unable to answer — the AI service is at its "
+            "usage limit right now. Please try again in a bit!"
+        )
     return state
-
+    
 
 def generate(state: ChatState) -> ChatState:
     if state.get("flagged"):
