@@ -405,3 +405,28 @@ footer {
   margin-bottom: 12px;
 }
 .about-card p:last-child { margin-bottom: 0; }
+
+
+/* ---------- Vision Demo ---------- */
+.vision-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+}
+.vision-card p { color: var(--muted); font-size: 0.9rem; margin-bottom: 12px; }
+.vision-card input[type="file"] { margin-bottom: 12px; }
+.vision-error { color: #b00020; }
+.vision-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 14px;
+}
+.vision-img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.vision-label { font-size: 0.82rem; color: var(--accent); margin-bottom: 6px; font-family: var(--mono); }
+.vision-stats { margin-top: 12px; font-size: 0.82rem; color: var(--muted); }
