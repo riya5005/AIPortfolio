@@ -37,7 +37,7 @@ def guard_input(state: ChatState) -> ChatState:
 
 def classify_intent(state: ChatState) -> ChatState:
     if state.get("flagged"):
-        return state  # already blocked, skip the rest of the pipeline's work
+        return state
 
     llm = get_llm()
     prompt = (
@@ -46,9 +46,12 @@ def classify_intent(state: ChatState) -> ChatState:
         "Reply with only the single category word — nothing else, no punctuation.\n\n"
         f"Question: {state['question']}"
     )
-    response = llm.invoke([{"role": "user", "content": prompt}])
-    intent = response.content.strip().lower()
-    state["intent"] = intent if intent in VALID_INTENTS else "general"
+    try:
+        response = llm.invoke([{"role": "user", "content": prompt}])
+        intent = response.content.strip().lower()
+        state["intent"] = intent if intent in VALID_INTENTS else "general"
+    except Exception:
+        state["intent"] = "general"
     return state
 
 
@@ -76,8 +79,16 @@ def generate(state: ChatState) -> ChatState:
     messages.extend(state.get("history", []))
     messages.append({"role": "user", "content": state["question"]})
 
-    response = llm.invoke(messages)
-    state["answer"] = response.content.strip()
+    try:
+        response = llm.invoke(messages)
+        state["answer"] = response.content.strip()
+    except Exception as e:
+        state["answer"] = (
+            "I'm temporarily unable to answer — the AI service is at its "
+            "usage limit right now. Please try again in a bit!"
+        )
+        state["flagged"] = True
+        state["flag_reason"] = f"llm_error:{type(e).__name__}"
     return state
 
 
@@ -85,12 +96,20 @@ def guard_output(state: ChatState) -> ChatState:
     if state.get("flagged"):
         return state  # already handled by input guard
 
+
+    if state["intent"] != "general":
+        return state
+
     llm = get_llm()
-    grounded = check_grounding(llm, state["answer"], state["context"])
-    if not grounded:
-        state["flagged"] = True
-        state["flag_reason"] = "output_guard:ungrounded"
-        state["answer"] = UNGROUNDED_FALLBACK
+    try:
+        grounded = check_grounding(llm, state["answer"], state["context"])
+        if not grounded:
+            state["flagged"] = True
+            state["flag_reason"] = "output_guard:ungrounded"
+            state["answer"] = UNGROUNDED_FALLBACK
+    except Exception:
+       
+        pass
     return state
 
 
