@@ -6,6 +6,7 @@ import Projects from './components/Projects.jsx'
 import Education from './components/Education.jsx'
 import Footer from './components/Footer.jsx'
 import Chatbot from './components/Chatbot.jsx'
+import VisionDemo from './components/VisionDemo.jsx'
 
 function App() {
   return (
