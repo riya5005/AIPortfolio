@@ -4,6 +4,8 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Optional
+from fastapi import UploadFile, File
+from app.vision.cv_utils import analyze_image
 
 from app.config import FRONTEND_ORIGIN
 from app.agent.graph import run_agent, classify_intent
@@ -37,7 +39,15 @@ def check_rate_limit(ip: str):
 @app.on_event("startup")
 def on_startup():
     init_db()
-
+    
+@app.post("/api/vision/analyze")
+async def vision_analyze(file: UploadFile = File(...)):
+    contents = await file.read()
+    try:
+        result = analyze_image(contents)
+    except Exception as e:
+        return {"error": str(e)}
+    return result
 
 class ChatRequest(BaseModel):
     message: str
