@@ -3,12 +3,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# --- Azure Key Vault (optional layered-defense upgrade) ---
-# If AZURE_KEY_VAULT_URL is set, secrets are pulled from Azure Key Vault
-# instead of plain environment variables — reduces the blast radius if
-# deploy config ever leaks, since secrets aren't sitting in plaintext env
-# vars on the hosting platform. Falls back to .env values automatically
-# if Key Vault isn't configured, so local dev still works without Azure.
+
 AZURE_KEY_VAULT_URL = os.getenv("AZURE_KEY_VAULT_URL", "")
 
 _kv_client = None
@@ -48,7 +43,7 @@ HF_ROUTER_URL = "https://router.huggingface.co/v1"
 # Embedding model
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "intfloat/multilingual-e5-large")
 
-# PostgreSQL - used only to log chat messages (optional, app still works without it)
+# PostgreSQL - used only to log chat messages 
 DATABASE_URL = get_secret("database-url", "DATABASE_URL")
 
 # Vector store persistence
