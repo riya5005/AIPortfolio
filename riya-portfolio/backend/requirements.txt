@@ -25,5 +25,3 @@ huggingface_hub>=0.31.0,<1.0.0
 sqlalchemy==2.0.31
 psycopg2-binary==2.9.9
 
-opencv-python-headless==4.10.0.84
-python-multipart==0.0.9
