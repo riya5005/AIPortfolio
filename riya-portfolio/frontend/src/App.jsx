@@ -17,7 +17,10 @@ function App() {
         <About />
         <Skills />
         <Projects />
+        <VisionDemo />
+
         <Education />
+        
       </div>
       <Footer />
       <Chatbot />
