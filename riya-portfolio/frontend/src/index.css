@@ -430,3 +430,7 @@ footer {
 }
 .vision-label { font-size: 0.82rem; color: var(--accent); margin-bottom: 6px; font-family: var(--mono); }
 .vision-stats { margin-top: 12px; font-size: 0.82rem; color: var(--muted); }
+
+
+.vision-predictions { margin-top: 14px; }
+.vision-predictions ul { margin-left: 18px; font-size: 0.85rem; color: var(--ink); }
