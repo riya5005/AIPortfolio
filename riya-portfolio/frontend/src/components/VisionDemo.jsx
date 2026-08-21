@@ -43,8 +43,9 @@ function VisionDemo() {
       <h2 className="section-title">Computer Vision Demo</h2>
       <div className="vision-card">
         <p>
-          Upload a photo to see live OpenCV analysis — edge detection and face
-          detection, processed entirely on the backend.
+          Upload a photo to see live OpenCV analysis (edge detection, face
+          detection) and deep learning image classification (MobileNetV2) —
+          processed entirely on the backend.
         </p>
         <input type="file" accept="image/*" onChange={handleFile} />
 
@@ -71,6 +72,18 @@ function VisionDemo() {
                 />
               </div>
             </div>
+
+            {result.predictions && result.predictions.length > 0 && (
+              <div className="vision-predictions">
+                <p className="vision-label">Deep learning classification (MobileNetV2)</p>
+                <ul>
+                  {result.predictions.map((p, i) => (
+                    <li key={i}>{p.label} — {(p.confidence * 100).toFixed(1)}%</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <p className="vision-stats">
               {result.width}×{result.height}px · edge pixel ratio: {result.edge_pixel_ratio}
             </p>
