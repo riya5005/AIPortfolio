@@ -21,14 +21,6 @@ def _encode_image(img: np.ndarray) -> str:
 
 
 def analyze_image(image_bytes: bytes) -> dict:
-    """
-    Runs basic computer vision analysis on an uploaded image:
-      - grayscale conversion
-      - Canny edge detection
-      - Haar cascade face detection
-
-    Returns stats plus base64-encoded processed images for display.
-    """
     img = _decode_image(image_bytes)
     if img is None:
         raise ValueError("Could not decode image — unsupported format or corrupted file.")
@@ -48,6 +40,12 @@ def analyze_image(image_bytes: bytes) -> dict:
     for (x, y, w, h) in faces:
         cv2.rectangle(annotated, (x, y), (x + w, y + h), (0, 255, 0), 3)
 
+    try:
+        predictions = classify_image(img)
+    except Exception as e:
+        predictions = []
+        print(f"[warning] Deep learning classification failed: {e}")
+
     return {
         "width": int(width),
         "height": int(height),
@@ -55,4 +53,5 @@ def analyze_image(image_bytes: bytes) -> dict:
         "edge_pixel_ratio": edge_pixel_ratio,
         "annotated_image_base64": _encode_image(annotated),
         "edges_image_base64": _encode_image(edges),
+        "predictions": predictions,
     }
