@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import base64
+from app.vision.dl_classifier import classify_image
 
 # OpenCV ships this classifier file built-in — no download required.
 _face_cascade = cv2.CascadeClassifier(
