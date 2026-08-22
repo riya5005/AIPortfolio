@@ -7,12 +7,24 @@ function Guestbook() {
   const [name, setName] = useState('')
   const [text, setText] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showMessages, setShowMessages] = useState(false)
+  const [fetched, setFetched] = useState(false)
 
-  useEffect(() => {
+  function loadMessages() {
     fetch(`${GUESTBOOK_API_URL}/api/messages`)
       .then((res) => res.json())
-      .then((data) => setMessages(data))
-  }, [])
+      .then((data) => {
+        setMessages(data)
+        setFetched(true)
+      })
+  }
+
+  function toggleMessages() {
+    if (!showMessages && !fetched) {
+      loadMessages()
+    }
+    setShowMessages((prev) => !prev)
+  }
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -26,7 +38,8 @@ function Guestbook() {
     })
       .then((res) => res.json())
       .then((newMsg) => {
-        setMessages([newMsg, ...messages])
+        setMessages((prev) => [newMsg, ...prev])
+        setFetched(true)
         setName('')
         setText('')
       })
@@ -57,17 +70,23 @@ function Guestbook() {
           </button>
         </form>
 
-        <div className="guestbook-list">
-          {messages.length === 0 && (
-            <p className="guestbook-empty">No messages yet — be the first to say hi!</p>
-          )}
-          {messages.map((m) => (
-            <div className="guestbook-entry" key={m._id}>
-              <span className="guestbook-name">{m.name}</span>
-              <span className="guestbook-text">{m.text}</span>
-            </div>
-          ))}
-        </div>
+        <button className="guestbook-toggle" onClick={toggleMessages}>
+          {showMessages ? 'Hide messages' : 'View messages'}
+        </button>
+
+        {showMessages && (
+          <div className="guestbook-list">
+            {fetched && messages.length === 0 && (
+              <p className="guestbook-empty">No messages yet — be the first to say hi!</p>
+            )}
+            {messages.map((m) => (
+              <div className="guestbook-entry" key={m._id}>
+                <span className="guestbook-name">{m.name}</span>
+                <span className="guestbook-text">{m.text}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )
