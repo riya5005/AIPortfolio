@@ -17,7 +17,11 @@ const skillGroups = [
   },
   {
     title: 'Backend',
-    items: ['Django', 'Django REST Framework', 'FastAPI', 'Node.js', 'Express', 'REST APIs'],
+    items: ['Django', 'Django REST Framework', 'FastAPI', 'REST APIs', 'Serializers', 'ViewSets'],
+  },
+  {
+    title: 'MERN Stack',
+    items: ['Node.js', 'Express', 'MongoDB', 'Mongoose', 'React'],
   },
   {
     title: 'Libraries',
@@ -39,4 +43,22 @@ const skillGroups = [
 
 function Skills() {
   return (
-    <section
+    <section id="skills">
+      <h2 className="section-title">Technical Skills</h2>
+      <div className="skills-grid">
+        {skillGroups.map((group) => (
+          <div className="skill-card" key={group.title}>
+            <h4>{group.title}</h4>
+            <div className="skill-tags">
+              {group.items.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+export default Skills
