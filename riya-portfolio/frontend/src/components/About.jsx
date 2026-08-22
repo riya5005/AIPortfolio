@@ -4,24 +4,16 @@ function About() {
       <h2 className="section-title">About</h2>
       <div className="about-card">
         <p>
-          I'm a B.Tech Computer Science &amp; Engineering (Data Science) student at
-          ABES Institute of Technology, AKTU, with a soft spot for turning messy,
-          real-world data into models that actually hold up in production — not just
-          in a notebook.
+          I'm a B.Tech Computer Science student focused on building AI systems that
+          actually work in production — not just in a notebook. My core work is in
+          Agentic AI and Retrieval-Augmented Generation, using LangChain, LangGraph,
+          and FAISS to build LLM-powered applications with real guardrails around them.
         </p>
         <p>
-          Most of my work sits at the intersection of Machine Learning and backend
-          engineering: I train and evaluate models with Scikit-learn and TensorFlow,
-          then wrap them in Django REST Framework so they're usable as real APIs, not
-          just static predictions. My fraud detection and housing price projects (below)
-          both follow this same end-to-end approach — from raw data to a deployed,
-          testable service.
-        </p>
-        <p>
-          Right now I'm going deeper into LLMs, Retrieval-Augmented Generation, and
-          agentic AI — the chatbot on this very site is one of those experiments,
-          built with LangChain, LangGraph, FAISS, and an open-source model served
-          through Hugging Face.
+          This site itself is a live example: a RAG chatbot with input/output security
+          checks, a Computer Vision demo (OpenCV + a deep learning classifier), and a
+          MERN-stack guestbook (Node.js, Express, MongoDB) — each piece deployed as its
+          own service, using whichever stack actually fits the problem best.
         </p>
       </div>
     </section>
