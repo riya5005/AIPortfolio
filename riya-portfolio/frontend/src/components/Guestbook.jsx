@@ -7,7 +7,7 @@ function Guestbook() {
 
   // Load messages when the page opens
   useEffect(() => {
-    fetch('http://localhost:4000/api/messages')
+    fetch('https://aiportfolio-1-83ch.onrender.com')
       .then((res) => res.json())
       .then((data) => setMessages(data))
   }, [])
@@ -15,7 +15,7 @@ function Guestbook() {
   // Send a new message
   function handleSubmit(e) {
     e.preventDefault()
-    fetch('http://localhost:4000/api/messages', {
+    fetch('https://aiportfolio-1-83ch.onrender.com', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, text }),
