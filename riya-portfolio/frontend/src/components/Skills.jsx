@@ -5,7 +5,7 @@ const skillGroups = [
   },
   {
     title: 'Machine Learning & AI',
-    items: ['LangChain', 'LangGraph', 'RAG', 'FAISS', 'Hugging Face Inference API', 'Prompt Engineering', 'Regression', 'Classification', 'Clustering', 'Feature Engineering', 'Model Evaluation'],
+    items: ['LangChain', 'LangGraph', 'RAG', 'FAISS', 'Prompt Engineering', 'Regression', 'Classification',  'Feature Engineering', 'Model Evaluation'],
   },
   {
     title: 'Computer Vision',
@@ -13,11 +13,11 @@ const skillGroups = [
   },
   {
     title: 'Backend',
-    items: ['Django', 'Django REST Framework', 'FastAPI', 'REST APIs', 'Serializers', 'ViewSets'],
+    items: ['Django', 'Django REST Framework', 'FastAPI', 'REST APIs',],
   },
   {
     title: 'MERN Stack',
-    items: ['Node.js', 'Express', 'MongoDB', 'Mongoose', 'React'],
+    items: ['Node.js', 'Express', 'MongoDB', 'React'],
   },
   {
     title: 'Databases',
