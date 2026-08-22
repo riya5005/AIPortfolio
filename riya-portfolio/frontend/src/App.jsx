@@ -7,6 +7,7 @@ import Education from './components/Education.jsx'
 import Footer from './components/Footer.jsx'
 import Chatbot from './components/Chatbot.jsx'
 import VisionDemo from './components/VisionDemo.jsx'
+import Guestbook from './components/Guestbook.jsx'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <VisionDemo />
 
         <Education />
+        <Guestbook />
         
       </div>
       <Footer />
