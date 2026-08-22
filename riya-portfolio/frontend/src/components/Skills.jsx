@@ -1,52 +1,42 @@
 const skillGroups = [
   {
     title: 'Programming',
-    items: ['Python', 'SQL', 'HTML', 'CSS', 'Data Structures & Algorithms'],
+    items: ['Python', 'JavaScript', 'SQL', 'HTML', 'CSS', 'Data Structures & Algorithms'],
+  },
+  {
+    title: 'Agentic AI & LLMs',
+    items: ['LangChain', 'LangGraph', 'RAG', 'FAISS', 'Hugging Face Inference API', 'Prompt Engineering'],
   },
   {
     title: 'Machine Learning',
     items: ['Regression', 'Classification', 'Clustering', 'Feature Engineering', 'Model Evaluation', 'Data Analysis'],
   },
   {
+    title: 'Computer Vision',
+    items: ['OpenCV', 'Edge Detection', 'Face Detection', 'TensorFlow', 'Image Classification'],
+  },
+  {
     title: 'Backend',
-    items: ['Django', 'Django REST Framework', 'REST APIs', 'Serializers', 'ViewSets'],
+    items: ['Django', 'Django REST Framework', 'FastAPI', 'Node.js', 'Express', 'REST APIs'],
   },
   {
     title: 'Libraries',
-    items: ['NumPy', 'Pandas', 'Matplotlib', 'Seaborn', 'Scikit-learn', 'TensorFlow', 'Flask'],
+    items: ['NumPy', 'Pandas', 'Matplotlib', 'Seaborn', 'Scikit-learn', 'Flask'],
   },
   {
     title: 'Databases',
-    items: ['PostgreSQL / MySQL'],
+    items: ['PostgreSQL', 'MySQL', 'MongoDB'],
   },
   {
     title: 'Tools',
     items: ['Git', 'Linux', 'Docker', 'Jupyter Notebook', 'VS Code'],
   },
   {
-    title: 'Cloud',
-    items: ['AWS EC2', 'AWS S3', 'AWS IAM'],
+    title: 'Cloud & Deployment',
+    items: ['AWS (EC2, S3, IAM)', 'Azure (Key Vault)', 'Render'],
   },
 ]
 
 function Skills() {
   return (
-    <section id="skills">
-      <h2 className="section-title">Technical Skills</h2>
-      <div className="skills-grid">
-        {skillGroups.map((group) => (
-          <div className="skill-card" key={group.title}>
-            <h4>{group.title}</h4>
-            <div className="skill-tags">
-              {group.items.map((item) => (
-                <span key={item}>{item}</span>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-export default Skills
+    <section
