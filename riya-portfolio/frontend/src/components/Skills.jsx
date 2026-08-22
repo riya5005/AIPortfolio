@@ -4,12 +4,8 @@ const skillGroups = [
     items: ['Python', 'JavaScript', 'SQL', 'HTML', 'CSS', 'Data Structures & Algorithms'],
   },
   {
-    title: 'Agentic AI & LLMs',
-    items: ['LangChain', 'LangGraph', 'RAG', 'FAISS', 'Hugging Face Inference API', 'Prompt Engineering'],
-  },
-  {
-    title: 'Machine Learning',
-    items: ['Regression', 'Classification', 'Clustering', 'Feature Engineering', 'Model Evaluation', 'Data Analysis'],
+    title: 'Machine Learning & AI',
+    items: ['LangChain', 'LangGraph', 'RAG', 'FAISS', 'Hugging Face Inference API', 'Prompt Engineering', 'Regression', 'Classification', 'Clustering', 'Feature Engineering', 'Model Evaluation'],
   },
   {
     title: 'Computer Vision',
@@ -24,20 +20,8 @@ const skillGroups = [
     items: ['Node.js', 'Express', 'MongoDB', 'Mongoose', 'React'],
   },
   {
-    title: 'Libraries',
-    items: ['NumPy', 'Pandas', 'Matplotlib', 'Seaborn', 'Scikit-learn', 'Flask'],
-  },
-  {
     title: 'Databases',
     items: ['PostgreSQL', 'MySQL', 'MongoDB'],
-  },
-  {
-    title: 'Tools',
-    items: ['Git', 'Linux', 'Docker', 'Jupyter Notebook', 'VS Code'],
-  },
-  {
-    title: 'Cloud & Deployment',
-    items: ['AWS (EC2, S3, IAM)', 'Azure (Key Vault)', 'Render'],
   },
 ]
 
