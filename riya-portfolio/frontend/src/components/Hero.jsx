@@ -14,13 +14,12 @@ function Hero() {
         <div className="hero-text">
          <h1>Riya</h1>
 
-<p className="role">
-  Machine Learning &amp; Backend Developer
-</p>
+<p className="role">Software Developer | CS Fundamentals &amp; Backend</p>
 
 <p className="hero-tagline">
-  Turning ideas into intelligent solutions with Machine Learning and AI.
-  Currently exploring LLMs, RAG and building projects that solve real-world problems.
+  CS undergrad building real, deployed software — strong in DSA and core
+  fundamentals, currently learning Java, with hands-on experience in
+  AI/LLM systems and full-stack development.
 </p>
           <div className="hero-links">
             <a href="https://github.com/riya5005" target="_blank" rel="noreferrer">GitHub ↗</a>
