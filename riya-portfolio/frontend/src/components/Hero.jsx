@@ -19,7 +19,7 @@ function Hero() {
 <p className="hero-tagline">
   CS undergrad building real, deployed software — strong in DSA and core
   fundamentals, currently learning Java, with hands-on experience in
-  AI/LLM systems and full-stack development.
+  AI systems and full-stack development.
 </p>
           <div className="hero-links">
             <a href="https://github.com/riya5005" target="_blank" rel="noreferrer">GitHub ↗</a>
