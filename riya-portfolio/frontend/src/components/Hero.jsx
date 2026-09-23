@@ -12,7 +12,7 @@ function Hero() {
           }}
         />
         <div className="hero-text">
-         <h1>Riya</h1>
+         <h1>Riya Kumari</h1>
 
 <p className="role">Software Developer | CS Fundamentals &amp; Backend</p>
 
