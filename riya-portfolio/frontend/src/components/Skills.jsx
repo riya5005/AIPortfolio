@@ -1,27 +1,27 @@
 const skillGroups = [
   {
     title: 'Programming',
-    items: ['Python', 'JavaScript', 'SQL', 'HTML', 'CSS', 'Data Structures & Algorithms'],
+    items: ['Python', 'JavaScript', 'SQL', 'HTML', 'CSS', 'Data Structures & Algorithms', 'OOP'],
   },
   {
-    title: 'Machine Learning & AI',
-    items: ['LangChain', 'LangGraph', 'RAG', 'FAISS', 'Prompt Engineering', 'Regression', 'Classification',  'Feature Engineering', 'Model Evaluation'],
+    title: 'AI & LLMs',
+    items: ['LangChain', 'LangGraph', 'RAG', 'FAISS', 'LLM-based Applications', 'Prompt Engineering'],
   },
   {
-    title: 'Computer Vision',
-    items: ['OpenCV', 'Edge Detection', 'Face Detection', 'TensorFlow', 'Image Classification'],
+    title: 'Machine Learning & Computer Vision',
+    items: ['Scikit-learn', 'TensorFlow', 'OpenCV', 'Regression', 'Classification', 'Model Evaluation'],
   },
   {
-    title: 'Backend',
-    items: ['Django', 'Django REST Framework', 'FastAPI', 'REST APIs',],
-  },
-  {
-    title: 'MERN Stack',
-    items: ['Node.js', 'Express', 'MongoDB', 'React'],
+    title: 'Full-Stack Development',
+    items: ['React', 'Node.js', 'Express', 'MongoDB', 'FastAPI', 'REST APIs'],
   },
   {
     title: 'Databases',
-    items: ['PostgreSQL', 'MySQL', 'MongoDB'],
+    items: ['MongoDB', 'PostgreSQL', 'MySQL'],
+  },
+  {
+    title: 'Currently Learning',
+    items: ['Java (Backend Development)', 'Data Structures & Algorithms (Deep Dive)'],
   },
 ]
 
