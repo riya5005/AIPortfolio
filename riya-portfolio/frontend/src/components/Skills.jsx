@@ -9,19 +9,19 @@ const skillGroups = [
   },
   {
     title: 'Machine Learning & Computer Vision',
-    items: ['Scikit-learn', 'TensorFlow', 'OpenCV', 'Regression', 'Classification', 'Model Evaluation'],
+    items: ['Scikit-learn', 'TensorFlow', 'Regression', 'Classification', 'Model Evaluation'],
   },
   {
-    title: 'Full-Stack Development',
-    items: ['React', 'Node.js', 'Express', 'MongoDB', 'FastAPI', 'REST APIs'],
+    title: 'MERN Stack',
+    items: ['MongoDB', 'Express', 'React', 'Node.js', 'Mongoose'],
+  },
+  {
+    title: 'Backend & APIs',
+    items: ['FastAPI', 'REST APIs'],
   },
   {
     title: 'Databases',
     items: ['MongoDB', 'PostgreSQL', 'MySQL'],
-  },
-  {
-    title: 'Currently Learning',
-    items: ['Java (Backend Development)', 'Data Structures & Algorithms (Deep Dive)'],
   },
 ]
 
