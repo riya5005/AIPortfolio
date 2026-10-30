@@ -530,3 +530,80 @@ footer {
 .guestbook-list {
   margin-top: 14px;
 }
+
+/* ---------- Theme toggle ---------- */
+.theme-toggle {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* ---------- Dark mode ---------- */
+[data-theme='dark'] {
+  --bg: #151714;
+  --bg-alt: #1f221d;
+  --ink: #ece9e2;
+  --muted: #a39e94;
+  --accent: #9db58a;
+  --accent-soft: #2b3326;
+  --card: #1b1d19;
+  --border: #2e312b;
+  color-scheme: dark;
+}
+/* buttons with a light accent background need dark text */
+[data-theme='dark'] .chat-toggle,
+[data-theme='dark'] .chat-header,
+[data-theme='dark'] .chat-msg.user,
+[data-theme='dark'] .chat-input button,
+[data-theme='dark'] .guestbook-form button {
+  color: #11140f;
+}
+[data-theme='dark'] input,
+[data-theme='dark'] textarea {
+  background: var(--bg);
+  color: var(--ink);
+}
+[data-theme='dark'] .vision-error { color: #ff8a80; }
+
+/* ---------- Smooth anchor scrolling under the sticky navbar ---------- */
+html { scroll-behavior: smooth; }
+section { scroll-margin-top: 90px; }
+img { max-width: 100%; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 700px) {
+  .container { padding: 0 16px; }
+  section { scroll-margin-top: 110px; padding: 24px 0; }
+
+  .navbar-inner { flex-wrap: wrap; gap: 8px; padding: 10px 16px; }
+  .navbar ul {
+    order: 3;
+    width: 100%;
+    gap: 16px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .navbar a { font-size: 0.85rem; }
+
+  .hero { padding: 28px 0 16px; }
+  .hero-row { flex-direction: column; gap: 14px; }
+  .hero-text h1 { font-size: 1.6rem; }
+
+  .project-card { padding: 14px 16px; }
+  .project-links { flex-wrap: wrap; gap: 10px; }
+
+  .chat-toggle { right: 14px; bottom: 14px; }
+  .chat-window {
+    left: 12px;
+    right: 12px;
+    bottom: 80px;
+    width: auto;
+    max-width: none;
+    height: 70vh;
+  }
+}
