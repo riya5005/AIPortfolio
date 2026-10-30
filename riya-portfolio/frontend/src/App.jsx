@@ -6,8 +6,6 @@ import Projects from './components/Projects.jsx'
 import Education from './components/Education.jsx'
 import Footer from './components/Footer.jsx'
 import Chatbot from './components/Chatbot.jsx'
-import VisionDemo from './components/VisionDemo.jsx'
-import Guestbook from './components/Guestbook.jsx'
 
 function App() {
   return (
@@ -18,11 +16,7 @@ function App() {
         <About />
         <Skills />
         <Projects />
-        <VisionDemo />
-
         <Education />
-        <Guestbook />
-        
       </div>
       <Footer />
       <Chatbot />
