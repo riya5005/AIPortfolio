@@ -25,10 +25,9 @@ function Education() {
         <h4>Focus Areas</h4>
 
         <div className="focus-tags">
-          <span>Machine Learning</span>
-          <span>Artificial Intelligence</span>
-          <span>Python</span>
-          <span>Django</span>
+          <span>Development</span>
+          <span>Machine Learning & Artificial Intelligence</span>
+          <span>Java</span>
           <span>PostgreSQL</span>
           <span>Data Structures</span>
           <span>Cloud Computing</span>
