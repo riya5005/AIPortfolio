@@ -8,7 +8,7 @@ const skillGroups = [
     items: ['LangChain', 'LangGraph', 'RAG', 'FAISS', 'LLM-based Applications', 'Prompt Engineering'],
   },
   {
-    title: 'Machine Learning & Computer Vision',
+    title: 'Machine Learning',
     items: ['Scikit-learn', 'TensorFlow', 'Regression', 'Classification', 'Model Evaluation'],
   },
   {
