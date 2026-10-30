@@ -11,12 +11,11 @@ function About() {
           I already do professionally.
         </p>
         <p>
-          I like understanding systems end-to-end: designing the logic, building
-          APIs, connecting databases, and actually deploying what I build. My
-          projects — an AI-powered RAG chatbot, ML applications, and a MERN-based
-          guestbook — reflect that: each one built with whatever stack fits the
-          problem, from Python and LangChain to Node.js, Express, and MongoDB.
-        </p>
+  I like understanding systems end-to-end: designing the logic, building
+  APIs, connecting databases, and actually deploying what I build. My
+  projects, including an AI-powered RAG chatbot and machine learning
+  applications served as APIs, reflect that.
+</p>
       </div>
     </section>
   )
